@@ -1,0 +1,7 @@
+*.bin
+*.debug
+TesteAndroid/TesteAndroid.Android/bin/
+TesteAndroid/TesteAndroid/bin/*
+TesteAndroid/TesteAndroid/obj/*
+TesteAndroid/TesteAndroid.Android/obj
+.vs/*
