@@ -5,7 +5,7 @@ using System.Text;
 using StoreMakeUpApp.Model;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-
+using System.Threading;
 namespace StoreMakeUpApp.Service
 {
     public class ProdutoService
@@ -22,9 +22,9 @@ namespace StoreMakeUpApp.Service
             List<Produto> retorno = new List<Produto>();
             try
             {
-                HttpResponseMessage response = await client.GetAsync(uri);
-                //var serializerOptions = null;
-                
+                 Thread.Sleep(10000);
+                await teste();
+                /*HttpResponseMessage response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
@@ -33,13 +33,23 @@ namespace StoreMakeUpApp.Service
                 else
                 {
                     throw new Exception("Erro na requsição");
-                }
+                }*/
                 return retorno;
             }
             catch(Exception ex)
             {
                 throw ex;
             }            
+        }
+        private Task<bool> teste()
+        {
+           var t =  Task.Run(() => this.retornoBooleano() );
+            t.Start();
+            return Task.FromResult(t.Result);
+        }
+        private bool retornoBooleano()
+        {
+            return true;
         }
     }
 }

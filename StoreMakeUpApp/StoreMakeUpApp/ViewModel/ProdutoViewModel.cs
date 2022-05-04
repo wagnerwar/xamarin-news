@@ -20,7 +20,10 @@ namespace StoreMakeUpApp.ViewModel
             _service = new ProdutoService();
             CarregarProdutosCommand = new Command(async () => await CarregarProdutos());
             Loading = true;
-            //CarregarProdutosCommand.Execute("teste");
+            /*if (CarregarProdutosCommand.CanExecute(null))
+            {
+                CarregarProdutosCommand.Execute(null);
+            }*/            
         }
         private async Task CarregarProdutos()
         {
