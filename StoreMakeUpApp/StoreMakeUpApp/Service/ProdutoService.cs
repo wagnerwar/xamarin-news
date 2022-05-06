@@ -6,6 +6,7 @@ using StoreMakeUpApp.Model;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Collections.ObjectModel;
 namespace StoreMakeUpApp.Service
 {
     public class ProdutoService

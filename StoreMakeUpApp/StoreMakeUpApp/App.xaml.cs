@@ -9,8 +9,14 @@ namespace StoreMakeUpApp
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
+            /*var imagem = new Image
+            {
+                Source = "logo.png",
+                Aspect = Aspect.AspectFit,
+                HorizontalOptions = LayoutOptions.End,
+                VerticalOptions = LayoutOptions.Fill
+            };*/
         }
 
         protected override void OnStart()

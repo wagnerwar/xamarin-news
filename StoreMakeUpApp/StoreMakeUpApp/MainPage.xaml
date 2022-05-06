@@ -4,15 +4,15 @@
              x:Class="StoreMakeUpApp.MainPage">
     <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
-            <Label HorizontalOptions="CenterAndExpand">LOJA DE MAQUIAGEM</Label>
+            <Image HorizontalOptions="Center"  Source="logo.png"></Image>
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <Button BackgroundColor="Black" TextColor="White" Text="Pesquisar" Command="{Binding CarregarProdutosCommand}"></Button>
         </StackLayout>
-        <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding Loading}" VerticalOptions="Center" HorizontalOptions="Center">
-            <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding Loading}" IsVisible="{Binding Loading}" />
+        <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center">
+            <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
         </Frame>
-        <ListView ItemsSource="{Binding Produtos}" x:Name="Lista" HorizontalOptions="CenterAndExpand">
+        <ListView ItemsSource="{Binding Items}" x:Name="Lista" HorizontalOptions="CenterAndExpand" CachingStrategy="RecycleElement">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
