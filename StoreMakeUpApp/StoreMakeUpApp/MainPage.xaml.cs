@@ -14,6 +14,12 @@ namespace StoreMakeUpApp
         {
             InitializeComponent();
             this.BindingContext = new ProdutoViewModel();
+            //Assinando mensagens
+            // Assinando mensagem
+            MessagingCenter.Subscribe<MainPage>(this, "MensagemErro", (sender) =>
+            {
+                DisplayAlert("Erro no processamento", "Lascou-se", "OK");
+            });
         }
     }
 }

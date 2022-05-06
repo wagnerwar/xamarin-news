@@ -19,24 +19,28 @@ namespace StoreMakeUpApp.ViewModel
         {
             _service = new ProdutoService();
             CarregarProdutosCommand = new Command(async () => await CarregarProdutos());
-            Loading = true;
-            /*if (CarregarProdutosCommand.CanExecute(null))
-            {
-                CarregarProdutosCommand.Execute(null);
-            }*/            
+            Loading = false;
         }
         private async Task CarregarProdutos()
         {
             try
             {
                 Loading = true;
+                OnPropertyChanged();
                 Produtos = await _service.RecuperarProdutosAsync();
+                OnPropertyChanged();
                 Loading = false;
                 OnPropertyChanged();
             }catch(Exception ex)
             {
-                throw ex;
+                ExibirMensagemErro();
             }
+        }
+        private void ExibirMensagemErro()
+        {
+            Loading = false;
+            OnPropertyChanged();
+            MessagingCenter.Send<MainPage>(new MainPage(), "MensagemErro");
         }
     }
 }

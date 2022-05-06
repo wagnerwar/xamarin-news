@@ -10,7 +10,8 @@ namespace StoreMakeUpApp.Service
 {
     public class ProdutoService
     {
-        private String urlServico = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+        private String urlServico = "https://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=lipstick";
+        //private String urlServico = "https://jsonplaceholder.typicode.com/users/";
         HttpClient client;
         public ProdutoService()
         {
@@ -18,38 +19,29 @@ namespace StoreMakeUpApp.Service
         }
         public async Task<List<Produto>> RecuperarProdutosAsync()
         {
-              Uri uri = new Uri(string.Format(urlServico, string.Empty));
+            Uri uri = new Uri(string.Format(urlServico, string.Empty));
             List<Produto> retorno = new List<Produto>();
             try
             {
-                 Thread.Sleep(10000);
-                await teste();
-                /*HttpResponseMessage response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    retorno = JsonConvert.DeserializeObject<List<Produto>>(content);
-                }
-                else
-                {
-                    throw new Exception("Erro na requsição");
-                }*/
+                string response = @"[
+                    {'id':114,'brand':'covergirl','name':'CoverGirl Outlast Longwear Lipstick','price':'10.99'}, 
+                    {'id':115,'brand':'covergirl','name':'CoverGirl Power','price':'11.99'},
+                    {'id':116,'brand':'covergirl','name':'CoverGirl Power 2','price':'12.80'}
+                ]";
+                //retorno = JsonConvert.DeserializeObject<List<Produto>>(response);
+                //String response = await client.GetStringAsync(uri);      
+                retorno = JsonConvert.DeserializeObject<List<Produto>>(response);
                 return retorno;
+            }
+            catch(JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
             }
             catch(Exception ex)
             {
+                String erro = ex.Message;
                 throw ex;
             }            
-        }
-        private Task<bool> teste()
-        {
-           var t =  Task.Run(() => this.retornoBooleano() );
-            t.Start();
-            return Task.FromResult(t.Result);
-        }
-        private bool retornoBooleano()
-        {
-            return true;
         }
     }
 }

@@ -2,12 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="StoreMakeUpApp.MainPage">
-    <StackLayout Margin="10">
+    <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
+            <Label HorizontalOptions="CenterAndExpand">LOJA DE MAQUIAGEM</Label>
+        </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            
+            <Button BackgroundColor="Black" TextColor="White" Text="Pesquisar" Command="{Binding CarregarProdutosCommand}"></Button>
         </StackLayout>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <ActivityIndicator IsEnabled="True" IsRunning="{ Binding Loading }" Color="Azure"></ActivityIndicator>
-        </StackLayout>
+        <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding Loading}" VerticalOptions="Center" HorizontalOptions="Center">
+            <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding Loading}" IsVisible="{Binding Loading}" />
+        </Frame>
+        <ListView ItemsSource="{Binding Produtos}" x:Name="Lista" HorizontalOptions="CenterAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding name}" HorizontalTextAlignment="Start"></Label>
+                            <Button BackgroundColor="Black" TextColor="White" Text="Ver informações" HorizontalOptions="EndAndExpand" Padding="5,5"></Button>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>

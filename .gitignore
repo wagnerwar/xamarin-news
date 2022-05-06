@@ -4,6 +4,7 @@
 */*.iOS/bin/
 */*.vs/*
 */*/obj
+*/*/bin/
 StoreMakeUp/
 *.bin
 *.debug
