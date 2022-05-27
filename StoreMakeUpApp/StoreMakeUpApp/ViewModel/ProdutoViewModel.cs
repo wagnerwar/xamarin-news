@@ -13,7 +13,8 @@ namespace StoreMakeUpApp.ViewModel
     public class ProdutoViewModel : BaseViewModel
     {
         private ProdutoService _service { get; set; }
-        public ICommand CarregarProdutosCommand { get; set; }        
+        public ICommand CarregarProdutosCommand { get; set; }
+        public ICommand CarregarProdutoCommand { get; set; }
         private ObservableCollection<Produto> items;
         public ObservableCollection<Produto> Items
         {
@@ -36,10 +37,24 @@ namespace StoreMakeUpApp.ViewModel
                 OnPropertyChanged();
             }
         }
+        private Produto _produto;
+        public Produto Produto
+        {
+            get
+            {
+                return this._produto;
+            }
+            set
+            {
+                this._produto = value;
+                OnPropertyChanged();
+            }
+        }
         public ProdutoViewModel()
         {
             _service = new ProdutoService();
             CarregarProdutosCommand = new Command(async () => await CarregarProdutos());
+            CarregarProdutoCommand = new Command<Produto>( async(produto) => await CarregarProduto(produto) );
             IsLoading = false;
             Items = new ObservableCollection<Produto>();
         }
@@ -49,7 +64,6 @@ namespace StoreMakeUpApp.ViewModel
             {
                 IsLoading = true;
                 Items.Clear();
-                await Task.Delay(3000);
                 var produtos =  await _service.RecuperarProdutosAsync();
                 if(produtos != null)
                 {
@@ -65,10 +79,27 @@ namespace StoreMakeUpApp.ViewModel
                 ExibirMensagemErro();
             }
         }
+        private async Task CarregarProduto(Produto produto)
+        {
+            try
+            {
+                // Redirecionar para outra tela
+                NavegacaoDetalhe(produto.id);
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
+            }
+        }
         private void ExibirMensagemErro()
         {
             IsLoading = false;
             MessagingCenter.Send<MainPage>(new MainPage(), "MensagemErro");
+        }
+
+        private void NavegacaoDetalhe(int id)
+        {
+            MessagingCenter.Send<MainPage, int>(new MainPage(), "Detalhe", id);
         }
         
     }

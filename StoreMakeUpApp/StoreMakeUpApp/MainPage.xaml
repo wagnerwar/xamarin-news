@@ -16,9 +16,16 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout x:Name="linha" Orientation="Horizontal">
                             <Label Text="{Binding name}" HorizontalTextAlignment="Start"></Label>
-                            <Button BackgroundColor="Black" TextColor="White" Text="Ver informações" HorizontalOptions="EndAndExpand" Padding="5,5"></Button>
+                            <Button 
+                                Command="{Binding CarregarProdutoCommand}" 
+                                BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}" 
+                                CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"
+                                BackgroundColor="Black" 
+                                TextColor="White" 
+                                Text="Ver informações" 
+                                HorizontalOptions="EndAndExpand" Padding="5,5"></Button>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

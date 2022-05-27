@@ -13,8 +13,8 @@ namespace StoreMakeUpApp.Model
         public String brand { get; set; }
         [JsonProperty(PropertyName = "name")]
         public String name { get; set; }
-        [JsonProperty(PropertyName = "price")]
-        public Double? price { get; set; }
+        [JsonProperty(PropertyName = "email")]
+        public String email { get; set; }
         /*[JsonProperty(PropertyName = "image_link")]
         public String image_link { get; set; }
         [JsonProperty(PropertyName = "product_link")]
