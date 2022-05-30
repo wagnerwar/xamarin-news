@@ -20,10 +20,6 @@ namespace StoreMakeUpApp
             {
                 DisplayAlert("Erro no processamento", "Lascou-se", "OK");
             });
-            MessagingCenter.Subscribe<MainPage, int>(this, "Detalhe", (sender, args) =>
-            {
-                Navigation.PushAsync(new DetalheUsuario(args));
-            });
         }
     }
 }

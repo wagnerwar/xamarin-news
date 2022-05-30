@@ -9,9 +9,9 @@ using StoreMakeUpApp.ViewModel;
 namespace StoreMakeUpApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DetalheUsuario : ContentPage
+    public partial class DetalheUsuarioPage : ContentPage
     {
-        public DetalheUsuario(int id)
+        public DetalheUsuarioPage(int id)
         {
             InitializeComponent();
             this.BindingContext = new DetalheViewModel(id);

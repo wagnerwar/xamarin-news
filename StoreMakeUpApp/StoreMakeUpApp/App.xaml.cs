@@ -1,22 +1,21 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+using StoreMakeUpApp.Interfaces;
+using StoreMakeUpApp.Service;
 namespace StoreMakeUpApp
 {
     public partial class App : Application
     {
+        public static INavigationService _navigationService { get; } = new ViewNavigationService();
         public App()
         {
             InitializeComponent();
-            MainPage = new MainPage();
-            /*var imagem = new Image
-            {
-                Source = "logo.png",
-                Aspect = Aspect.AspectFit,
-                HorizontalOptions = LayoutOptions.End,
-                VerticalOptions = LayoutOptions.Fill
-            };*/
+            // Implementando navegação
+            _navigationService.Configure("MainPage", typeof(MainPage));
+            _navigationService.Configure("DetalheUsuarioPage", typeof(DetalheUsuarioPage));
+            var mainPage = ((ViewNavigationService)_navigationService).SetRootPage("MainPage");
+            MainPage = new MainPage();            
         }
 
         protected override void OnStart()

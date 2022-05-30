@@ -7,11 +7,12 @@ using StoreMakeUpApp.Service;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
-
+using StoreMakeUpApp.Interfaces;
 namespace StoreMakeUpApp.ViewModel
 {
     public class ProdutoViewModel : BaseViewModel
     {
+        private INavigationService _navigationService;
         private ProdutoService _service { get; set; }
         public ICommand CarregarProdutosCommand { get; set; }
         public ICommand CarregarProdutoCommand { get; set; }
@@ -52,6 +53,7 @@ namespace StoreMakeUpApp.ViewModel
         }
         public ProdutoViewModel()
         {
+            _navigationService = App._navigationService;
             _service = new ProdutoService();
             CarregarProdutosCommand = new Command(async () => await CarregarProdutos());
             CarregarProdutoCommand = new Command<Produto>( async(produto) => await CarregarProduto(produto) );
@@ -84,7 +86,7 @@ namespace StoreMakeUpApp.ViewModel
             try
             {
                 // Redirecionar para outra tela
-                NavegacaoDetalhe(produto.id);
+                await NavegacaoDetalheAsync(produto.id);
             }
             catch (Exception ex)
             {
@@ -97,9 +99,9 @@ namespace StoreMakeUpApp.ViewModel
             MessagingCenter.Send<MainPage>(new MainPage(), "MensagemErro");
         }
 
-        private void NavegacaoDetalhe(int id)
+        private async Task NavegacaoDetalheAsync(int id)
         {
-            MessagingCenter.Send<MainPage, int>(new MainPage(), "Detalhe", id);
+            await _navigationService.NavigateAsync("DetalheUsuarioPage", id, true);
         }
         
     }
