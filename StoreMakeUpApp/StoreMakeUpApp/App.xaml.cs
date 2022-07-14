@@ -7,15 +7,11 @@ namespace StoreMakeUpApp
 {
     public partial class App : Application
     {
-        public static INavigationService _navigationService { get; } = new ViewNavigationService();
         public App()
         {
             InitializeComponent();
             // Implementando navegação
-            _navigationService.Configure("MainPage", typeof(MainPage));
-            _navigationService.Configure("DetalheUsuarioPage", typeof(DetalheUsuarioPage));
-            var mainPage = ((ViewNavigationService)_navigationService).SetRootPage("MainPage");
-            MainPage = new MainPage();            
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()

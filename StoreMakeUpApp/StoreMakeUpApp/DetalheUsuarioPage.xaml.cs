@@ -8,13 +8,12 @@ using Xamarin.Forms.Xaml;
 using StoreMakeUpApp.ViewModel;
 namespace StoreMakeUpApp
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetalheUsuarioPage : ContentPage
     {
         public DetalheUsuarioPage(int id)
         {
             InitializeComponent();
-            this.BindingContext = new DetalheViewModel(id);
+            this.BindingContext = new DetalheViewModel(id, Navigation);
         }
     }
 }

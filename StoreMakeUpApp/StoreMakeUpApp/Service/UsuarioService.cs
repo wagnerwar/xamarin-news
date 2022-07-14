@@ -9,19 +9,19 @@ using System.Threading;
 using System.Collections.ObjectModel;
 namespace StoreMakeUpApp.Service
 {
-    public class ProdutoService
+    public class UsuarioService
     {
         //private String urlServico = "https://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=lipstick";
         private String urlServico = "https://jsonplaceholder.typicode.com/users/";
         HttpClient client;
-        public ProdutoService()
+        public UsuarioService()
         {
             client = new HttpClient();
         }
-        public async Task<List<Produto>> RecuperarProdutosAsync()
+        public async Task<List<Usuario>> RecuperarUsuariosAsync()
         {
             Uri uri = new Uri(string.Format(urlServico, string.Empty));
-            List<Produto> retorno = new List<Produto>();
+            List<Usuario> retorno = new List<Usuario>();
             try
             {
                 /*string response = @"[
@@ -30,7 +30,7 @@ namespace StoreMakeUpApp.Service
                     {'id':116,'brand':'covergirl','name':'CoverGirl Power 2','price':'12.80'}
                 ]";*/
                 string response = await client.GetStringAsync(uri);      
-                retorno = JsonConvert.DeserializeObject<List<Produto>>(response);
+                retorno = JsonConvert.DeserializeObject<List<Usuario>>(response);
                 return retorno;
             }
             catch(JsonException jsException)
@@ -43,14 +43,14 @@ namespace StoreMakeUpApp.Service
                 throw ex;
             }            
         }
-        public async Task<Produto> CarregarProdutoAsync(int id)
+        public async Task<Usuario> CarregarUsuarioAsync(int id)
         {
             Uri uri = new Uri(string.Format(urlServico, string.Empty));
-            Produto retorno = new Produto();
+            Usuario retorno = new Usuario();
             try
             {
                 string response = await client.GetStringAsync(String.Format(uri + "{0}", id ));
-                retorno = JsonConvert.DeserializeObject<Produto>(response);
+                retorno = JsonConvert.DeserializeObject<Usuario>(response);
                 return retorno;
             }
             catch (JsonException jsException)

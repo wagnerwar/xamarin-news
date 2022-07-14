@@ -17,8 +17,8 @@ namespace StoreMakeUpApp.Service
         private NavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
         public ViewNavigationService()
         {
-            this.Configure("MainPage", typeof(MainPage));
-            this.Configure("DetalheUsuarioPage", typeof(DetalheUsuarioPage));
+            this.Configure(nameof(MainPage), typeof(MainPage));
+            this.Configure(nameof(DetalheUsuarioPage), typeof(DetalheUsuarioPage));
         }
         public void Configure(string pageKey, Type pageType)
         {

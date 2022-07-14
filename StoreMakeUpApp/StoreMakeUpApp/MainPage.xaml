@@ -7,7 +7,7 @@
             <Image HorizontalOptions="Center"  Source="logo.png"></Image>
         </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-            <Button BackgroundColor="Black" TextColor="White" Text="Pesquisar" Command="{Binding CarregarProdutosCommand}"></Button>
+            <Button BackgroundColor="Black" TextColor="White" Text="Pesquisar" Command="{Binding CarregarUsuariosCommand}"></Button>
         </StackLayout>
         <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center">
             <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
@@ -19,7 +19,7 @@
                         <StackLayout x:Name="linha" Orientation="Horizontal">
                             <Label Text="{Binding name}" HorizontalTextAlignment="Start"></Label>
                             <Button 
-                                Command="{Binding CarregarProdutoCommand}" 
+                                Command="{Binding CarregarUsuarioCommand}" 
                                 BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}" 
                                 CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"
                                 BackgroundColor="Black" 

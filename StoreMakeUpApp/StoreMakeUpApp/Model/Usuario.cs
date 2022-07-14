@@ -5,7 +5,7 @@ using System.Text;
 
 namespace StoreMakeUpApp.Model
 {
-    public class Produto
+    public class Usuario
     {
         [JsonProperty(PropertyName = "id")]
         public int id { get; set; }
@@ -15,6 +15,10 @@ namespace StoreMakeUpApp.Model
         public String name { get; set; }
         [JsonProperty(PropertyName = "email")]
         public String email { get; set; }
+        [JsonProperty(PropertyName = "username")]
+        public String username { get; set; }
+        [JsonProperty(PropertyName = "address")]
+        public Adress address { get; set; }
         /*[JsonProperty(PropertyName = "image_link")]
         public String image_link { get; set; }
         [JsonProperty(PropertyName = "product_link")]
@@ -47,11 +51,15 @@ namespace StoreMakeUpApp.Model
         public List<ProductColor> product_colors { get; set; }*/
 
     }
-    public class ProductColor
+    public class Adress
     {
-        [JsonProperty(PropertyName = "hex_value")]
-        public String hex_value { get; set; }
-        [JsonProperty(PropertyName = "colour_name")]
-        public String colour_name { get; set; }
+        [JsonProperty(PropertyName = "street")]
+        public String Street { get; set; }
+        [JsonProperty(PropertyName = "suite")]
+        public String Suite { get; set; }
+        [JsonProperty(PropertyName = "city")]
+        public String City { get; set; }
+        [JsonProperty(PropertyName = "zipcode")]
+        public String ZipCode { get; set; }
     }
 }
