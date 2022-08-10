@@ -3,16 +3,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+
 namespace StoreMakeUpApp.Model
 {
-    public class PostagemUsuario
+    public class ComentarioPostagem
     {
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
-        [JsonProperty(PropertyName = "title")]
-        public String Title { get; set; }
+        [JsonProperty(PropertyName = "name")]
+        public String Name { get; set; }
         [JsonProperty(PropertyName = "body")]
         public String Body { get; set; }
-        public List<ComentarioPostagem> Comentarios { get; set; }
+        [JsonProperty(PropertyName = "email")]
+        public String Email { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace StoreMakeUpApp.Service
         private String urlServico = "https://jsonplaceholder.typicode.com/users/";
         private String acaoPesquisarUsuario = "https://jsonplaceholder.typicode.com/users/?username={0}";
         private String acaoPostagensUsuario = "https://jsonplaceholder.typicode.com/posts/?userId={0}";
+        private String acaoComentariosPostagem = "https://jsonplaceholder.typicode.com/comments?postId=1";
+
         HttpClient client;
         public UsuarioService()
         {
@@ -88,6 +90,26 @@ namespace StoreMakeUpApp.Service
             {
                 string response = await client.GetStringAsync(uri);
                 retorno = JsonConvert.DeserializeObject<List<PostagemUsuario>>(response);
+                return retorno;
+            }
+            catch (JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
+            }
+            catch (Exception ex)
+            {
+                String erro = ex.Message;
+                throw ex;
+            }
+        }
+        public async Task<List<ComentarioPostagem>> BuscarComentariosPostagemAsync(int id)
+        {
+            Uri uri = new Uri(string.Format(acaoComentariosPostagem, id));
+            List<ComentarioPostagem> retorno = new List<ComentarioPostagem>();
+            try
+            {
+                string response = await client.GetStringAsync(uri);
+                retorno = JsonConvert.DeserializeObject<List<ComentarioPostagem>>(response);
                 return retorno;
             }
             catch (JsonException jsException)

@@ -13,6 +13,41 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
                 <Label Text="{Binding Postagem.Body}" HorizontalOptions="StartAndExpand"></Label>
             </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                <ImageButton                                 
+                    Source="icone_comentario.png"                   
+                    Command="{Binding ExibirComentariosCommand}"                                                                
+                    ></ImageButton>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsExibirComentarios}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+                <Label Text="Comentários" FontSize="Large" HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
+                <!-- <ListView ItemsSource="{Binding Postagem.Comentarios}" x:Name="Lista" HorizontalOptions="CenterAndExpand" CachingStrategy="RecycleElement">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout x:Name="linha" Orientation="Horizontal" HorizontalOptions="Fill">
+                                    <Grid Margin="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="40" />
+                                            <ColumnDefinition Width="40" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding Name}" 
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       HorizontalTextAlignment="Start" FontSize="Small"></Label>
+                                        <Label Text="{Binding Body}"                                      
+                                       Grid.Column="1"
+                                       HorizontalTextAlignment="Start" FontSize="Small"></Label>
+                                    </Grid>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView> -->
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

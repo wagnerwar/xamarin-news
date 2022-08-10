@@ -66,7 +66,7 @@ namespace StoreMakeUpApp.ViewModel
         {
             try
             {
-                await _navigation.PushAsync(new PostagemUsuarioPage(postagem));
+                await _navigation.PushModalAsync(new PostagemUsuarioPage(postagem), true);
             }
             catch (Exception ex)
             {
