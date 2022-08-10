@@ -13,6 +13,8 @@ namespace StoreMakeUpApp.Service
     {
         //private String urlServico = "https://makeup-api.herokuapp.com/api/v1/products.json?brand=covergirl&product_type=lipstick";
         private String urlServico = "https://jsonplaceholder.typicode.com/users/";
+        private String acaoPesquisarUsuario = "https://jsonplaceholder.typicode.com/users/?username={0}";
+        private String acaoPostagensUsuario = "https://jsonplaceholder.typicode.com/posts/?userId={0}";
         HttpClient client;
         public UsuarioService()
         {
@@ -23,12 +25,7 @@ namespace StoreMakeUpApp.Service
             Uri uri = new Uri(string.Format(urlServico, string.Empty));
             List<Usuario> retorno = new List<Usuario>();
             try
-            {
-                /*string response = @"[
-                    {'id':114,'brand':'covergirl','name':'CoverGirl Outlast Longwear Lipstick','price':'10.99'}, 
-                    {'id':115,'brand':'covergirl','name':'CoverGirl Power','price':'11.99'},
-                    {'id':116,'brand':'covergirl','name':'CoverGirl Power 2','price':'12.80'}
-                ]";*/
+            {               
                 string response = await client.GetStringAsync(uri);      
                 retorno = JsonConvert.DeserializeObject<List<Usuario>>(response);
                 return retorno;
@@ -51,6 +48,46 @@ namespace StoreMakeUpApp.Service
             {
                 string response = await client.GetStringAsync(String.Format(uri + "{0}", id ));
                 retorno = JsonConvert.DeserializeObject<Usuario>(response);
+                return retorno;
+            }
+            catch (JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
+            }
+            catch (Exception ex)
+            {
+                String erro = ex.Message;
+                throw ex;
+            }
+        }
+        public async Task<List<Usuario>> PesquisarUsuarioAsync(String nome)
+        {
+            Uri uri = new Uri(string.Format(acaoPesquisarUsuario, nome));
+            List<Usuario> retorno = new List<Usuario>();
+            try
+            {
+                string response = await client.GetStringAsync(uri);
+                retorno = JsonConvert.DeserializeObject<List<Usuario>>(response);
+                return retorno;
+            }
+            catch (JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
+            }
+            catch (Exception ex)
+            {
+                String erro = ex.Message;
+                throw ex;
+            }
+        }
+        public async Task<List<PostagemUsuario>> PesquisarPostagensUsuarioAsync(int id)
+        {
+            Uri uri = new Uri(string.Format(acaoPostagensUsuario, id));
+            List<PostagemUsuario> retorno = new List<PostagemUsuario>();
+            try
+            {
+                string response = await client.GetStringAsync(uri);
+                retorno = JsonConvert.DeserializeObject<List<PostagemUsuario>>(response);
                 return retorno;
             }
             catch (JsonException jsException)

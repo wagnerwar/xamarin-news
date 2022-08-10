@@ -6,6 +6,13 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
             <Image HorizontalOptions="Center"  Source="logo.png"></Image>
         </StackLayout>
+        <StackLayout>
+            <Entry 
+                Placeholder="Digite um nome para pesquisa" 
+                Keyboard="Plain" 
+                x:Name="NomePesquisa" 
+                Text="{Binding NomePesquisa}"></Entry>
+        </StackLayout>
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
             <Button BackgroundColor="Black" TextColor="White" Text="Pesquisar" Command="{Binding CarregarUsuariosCommand}"></Button>
         </StackLayout>
@@ -16,16 +23,37 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout x:Name="linha" Orientation="Horizontal">
-                            <Label Text="{Binding name}" HorizontalTextAlignment="Start"></Label>
-                            <Button 
-                                Command="{Binding CarregarUsuarioCommand}" 
-                                BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}" 
-                                CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"
-                                BackgroundColor="Black" 
-                                TextColor="White" 
-                                Text="Ver informações" 
-                                HorizontalOptions="EndAndExpand" Padding="5,5"></Button>
+                        <StackLayout x:Name="linha" Orientation="Horizontal" HorizontalOptions="Fill">
+                            <Grid Margin="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="280" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="40" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding name}" 
+                                       Grid.Row="0" 
+                                       Grid.Column="0"
+                                       HorizontalTextAlignment="Start"></Label>
+                                <ImageButton 
+                                    Source="feed.png" 
+                                    Grid.Column="1"
+                                    Command="{Binding CarregarPostagensUsuarioCommand}"                                
+                                    BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}"                                
+                                    CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"                                 
+                                    HorizontalOptions="End"  
+                                    VerticalOptions="FillAndExpand"></ImageButton>
+                                <ImageButton                                 
+                                    Source="icone_detalhe.png" 
+                                    Grid.Column="2"                                 
+                                    Command="{Binding CarregarUsuarioCommand}"                                 
+                                    BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}"                                 
+                                    CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"                                 
+                                    HorizontalOptions="End" 
+                                    VerticalOptions="FillAndExpand"></ImageButton>
+                            </Grid>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
