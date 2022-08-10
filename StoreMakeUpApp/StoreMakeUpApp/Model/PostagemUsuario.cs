@@ -13,6 +13,5 @@ namespace StoreMakeUpApp.Model
         public String Title { get; set; }
         [JsonProperty(PropertyName = "body")]
         public String Body { get; set; }
-        public List<ComentarioPostagem> Comentarios { get; set; }
     }
 }

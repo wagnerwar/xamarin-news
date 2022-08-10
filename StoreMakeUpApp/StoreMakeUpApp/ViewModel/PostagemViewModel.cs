@@ -25,6 +25,15 @@ namespace StoreMakeUpApp.ViewModel
                 postagem = value;
             }
         }
+        private ObservableCollection<ComentarioPostagem> comentarios;
+        public ObservableCollection<ComentarioPostagem> Comentarios
+        {
+            get { return comentarios; }
+            set
+            {
+                comentarios = value;
+            }
+        }
         private bool exibirComentarios;
         public bool IsExibirComentarios
         {
@@ -32,13 +41,14 @@ namespace StoreMakeUpApp.ViewModel
             set
             {
                 exibirComentarios = value;
+                OnPropertyChanged();
             }
         }
         public PostagemViewModel(PostagemUsuario postagem, INavigation navigation)
         {
             _navigation = navigation;
             _service = new UsuarioService();
-            postagem.Comentarios = new List<ComentarioPostagem>();
+            this.Comentarios = new ObservableCollection<ComentarioPostagem>();
             this.Postagem = postagem;
             IsExibirComentarios = false;
             ExibirComentariosCommand = new Command(async () => await EventoExibirComentarios());            
@@ -47,9 +57,14 @@ namespace StoreMakeUpApp.ViewModel
         {
             try
             {
-                //IsLoading = true;                
-                //Postagem.Comentarios = await _service.BuscarComentariosPostagemAsync(postagem.Id);
-                //IsLoading = false;
+                IsLoading = true;                
+                var lista = await _service.BuscarComentariosPostagemAsync(postagem.Id);
+                Comentarios.Clear();
+                foreach(var item in lista)
+                {
+                    Comentarios.Add(item);
+                }
+                IsLoading = false;
                 IsExibirComentarios = true;
             }
             catch (Exception ex)
