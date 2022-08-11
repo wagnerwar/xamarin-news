@@ -7,6 +7,13 @@
             <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center">
                 <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
             </Frame>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                <ImageButton                                 
+                    Source="icone_voltar.png"                   
+                    Command="{Binding FecharPostagemCommand}" 
+                    HorizontalOptions="StartAndExpand"                                                           
+                    ></ImageButton>
+            </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                 <Label Text="{Binding Postagem.Title}" HorizontalOptions="StartAndExpand" FontSize="Large"></Label>
             </StackLayout>

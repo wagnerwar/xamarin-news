@@ -16,6 +16,7 @@ namespace StoreMakeUpApp.ViewModel
         private INavigation _navigation { get; set; }
         private UsuarioService _service { get; set; }
         public ICommand ExibirComentariosCommand { get; set; }
+        public ICommand FecharPostagemCommand { get; set; }
         private PostagemUsuario postagem;
         public PostagemUsuario Postagem
         {
@@ -51,7 +52,8 @@ namespace StoreMakeUpApp.ViewModel
             this.Comentarios = new ObservableCollection<ComentarioPostagem>();
             this.Postagem = postagem;
             IsExibirComentarios = false;
-            ExibirComentariosCommand = new Command(async () => await EventoExibirComentarios());            
+            ExibirComentariosCommand = new Command(async () => await EventoExibirComentarios());
+            FecharPostagemCommand = new Command(async () => await FecharPostagem());
         }
         private async Task EventoExibirComentarios()
         {
@@ -71,6 +73,10 @@ namespace StoreMakeUpApp.ViewModel
             {
                 ExibirMensagemErro();
             }
+        }
+        private async Task FecharPostagem()
+        {
+            await _navigation.PopModalAsync();
         }
     }
 }
