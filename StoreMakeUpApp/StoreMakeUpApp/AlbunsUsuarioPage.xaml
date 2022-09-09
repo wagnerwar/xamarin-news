@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StoreMakeUpApp.PostagensUsuarioPage" Title="Postagens">
+             x:Class="StoreMakeUpApp.AlbunsUsuarioPage" Title="Albuns">
     <ContentPage.Content>
         <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
             <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center">
                 <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
             </Frame>
             <StackLayout>
-                <Label Text="Postagens do usuario " HorizontalTextAlignment="Center" FontSize="Large"></Label>
+                <Label Text="Albuns do usuario " HorizontalTextAlignment="Center" FontSize="Large"></Label>
                 <Label Text="{Binding Usuario.name}" x:Name="NomeUsuario" HorizontalOptions="Center" FontSize="Large"></Label>
             </StackLayout>
             <ListView 
@@ -23,14 +23,6 @@
                                 <Label Text="{Binding Title}" 
                                        HorizontalTextAlignment="Start">
                                 </Label>
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        NumberOfTapsRequired="1" 
-                                        Command="{Binding CarregarDetalheCommand}"                                         
-                                        BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}"                                 
-                                        CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}">
-                                    </TapGestureRecognizer>
-                                </StackLayout.GestureRecognizers>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

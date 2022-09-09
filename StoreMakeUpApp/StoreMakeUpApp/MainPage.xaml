@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="StoreMakeUpApp.MainPage">
+             x:Class="StoreMakeUpApp.MainPage" Title="Principal">
     <StackLayout Margin="10" HorizontalOptions="FillAndExpand">
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="10">
             <Image HorizontalOptions="Center"  Source="logo.png"></Image>
@@ -32,6 +32,7 @@
                                     <ColumnDefinition Width="280" />
                                     <ColumnDefinition Width="40" />
                                     <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="40" />
                                 </Grid.ColumnDefinitions>
                                 <Label Text="{Binding name}" 
                                        Grid.Row="0" 
@@ -48,6 +49,14 @@
                                 <ImageButton                                 
                                     Source="icone_detalhe.png" 
                                     Grid.Column="2"                                 
+                                    Command="{Binding CarregarUsuarioCommand}"                                 
+                                    BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}"                                 
+                                    CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"                                 
+                                    HorizontalOptions="End" 
+                                    VerticalOptions="FillAndExpand"></ImageButton>
+                                <ImageButton                                 
+                                    Source="icone_album.png" 
+                                    Grid.Column="3"                                 
                                     Command="{Binding CarregarUsuarioCommand}"                                 
                                     BindingContext="{Binding Source={x:Reference Lista}, Path=BindingContext}"                                 
                                     CommandParameter="{Binding Source={x:Reference linha}, Path=BindingContext}"                                 

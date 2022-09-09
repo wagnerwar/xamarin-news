@@ -17,6 +17,7 @@ namespace StoreMakeUpApp.ViewModel
         public ICommand CarregarUsuariosCommand { get; set; }
         public ICommand CarregarUsuarioCommand { get; set; }
         public ICommand CarregarPostagensUsuarioCommand { get; set; }
+        public ICommand CarregarAlbunsUsuarioCommand { get; set; }
         private ObservableCollection<Usuario> items;
         public ObservableCollection<Usuario> Items
         {
@@ -60,6 +61,7 @@ namespace StoreMakeUpApp.ViewModel
             CarregarUsuariosCommand = new Command(async () => await CarregarUsuarios());
             CarregarUsuarioCommand = new Command<Usuario>( async(usuario) => await CarregarUsuario(usuario) );
             CarregarPostagensUsuarioCommand = new Command<Usuario>(async (usuario) => await CarregarPostagensUsuario(usuario));
+            CarregarAlbunsUsuarioCommand = new Command<Usuario>(async (usuario) => await CarregarAlbunsUsuario(usuario));
             IsLoading = false;
             Items = new ObservableCollection<Usuario>();
         }
@@ -138,6 +140,18 @@ namespace StoreMakeUpApp.ViewModel
                 ExibirMensagemErro();
             }
         }
+        private async Task CarregarAlbunsUsuario(Usuario usuario)
+        {
+            try
+            {
+                // Redirecionar para outra tela
+                await NavegacaoAlbunsAsync(usuario.id);
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
+            }
+        }
         private async Task NavegacaoDetalheAsync(int id)
         {
             await _navigation.PushAsync(new DetalheUsuarioPage(id), true);
@@ -145,6 +159,10 @@ namespace StoreMakeUpApp.ViewModel
         private async Task NavegacaoPostagensAsync(int id)
         {
             await _navigation.PushAsync(new PostagensUsuarioPage(id), true);
+        }
+        private async Task NavegacaoAlbunsAsync(int id)
+        {
+            await _navigation.PushAsync(new AlbunsUsuarioPage(id), true);
         }
     }
 }
