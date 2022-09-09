@@ -17,6 +17,7 @@ namespace StoreMakeUpApp.Service
         private String acaoPostagensUsuario = "https://jsonplaceholder.typicode.com/posts/?userId={0}";
         private String acaoComentariosPostagem = "https://jsonplaceholder.typicode.com/comments?postId={0}";
         private String acaoAlbunsUsuarioPostagem = "https://jsonplaceholder.typicode.com/albums?userId={0}";
+        private String acaoFotosAlbum = "https://jsonplaceholder.typicode.com/albums/{0}/photos";
 
         HttpClient client;
         public UsuarioService()
@@ -111,6 +112,46 @@ namespace StoreMakeUpApp.Service
             {
                 string response = await client.GetStringAsync(uri);
                 retorno = JsonConvert.DeserializeObject<List<AlbumUsuario>>(response);
+                return retorno;
+            }
+            catch (JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
+            }
+            catch (Exception ex)
+            {
+                String erro = ex.Message;
+                throw ex;
+            }
+        }
+        public async Task<List<ComentarioPostagem>> BuscarComentariosPostagemAsync(int id)
+        {
+            Uri uri = new Uri(string.Format(acaoComentariosPostagem, id));
+            List<ComentarioPostagem> retorno = new List<ComentarioPostagem>();
+            try
+            {
+                string response = await client.GetStringAsync(uri);
+                retorno = JsonConvert.DeserializeObject<List<ComentarioPostagem>>(response);
+                return retorno;
+            }
+            catch (JsonException jsException)
+            {
+                throw new Exception(jsException.Message);
+            }
+            catch (Exception ex)
+            {
+                String erro = ex.Message;
+                throw ex;
+            }
+        }
+        public async Task<List<FotoAlbum>> BuscarFotosAlbumAsync(int id)
+        {
+            Uri uri = new Uri(string.Format(acaoFotosAlbum, id));
+            List<FotoAlbum> retorno = new List<FotoAlbum>();
+            try
+            {
+                string response = await client.GetStringAsync(uri);
+                retorno = JsonConvert.DeserializeObject<List<FotoAlbum>>(response);
                 return retorno;
             }
             catch (JsonException jsException)

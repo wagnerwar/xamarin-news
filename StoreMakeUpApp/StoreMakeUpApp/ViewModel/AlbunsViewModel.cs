@@ -13,6 +13,7 @@ namespace StoreMakeUpApp.ViewModel
 {
     public class AlbunsViewModel : BaseViewModel
     {
+        public ICommand CarregarFotosCommand { get; set; }
         private Usuario usuario;
         public Usuario Usuario
         {
@@ -40,6 +41,7 @@ namespace StoreMakeUpApp.ViewModel
             IsLoading = true;
             Items = new ObservableCollection<AlbumUsuario>();
             var t = Task.Run(() => this.CarregarAlbuns(id));
+            CarregarFotosCommand = new Command<AlbumUsuario>(async (album) => await CarregarFotos(album));
             t.Wait();
         }
         private async Task CarregarAlbuns(int id)
@@ -58,6 +60,17 @@ namespace StoreMakeUpApp.ViewModel
             {
                 ExibirMensagemErro();
                 IsLoading = false;
+            }
+        }
+        private async Task CarregarFotos(AlbumUsuario album)
+        {
+            try
+            {
+                await _navigation.PushAsync(new FotosAlbumPage(album), true);
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
             }
         }
     }
