@@ -7,8 +7,9 @@
             <Frame Padding="50,30,50,30" HasShadow="true" BackgroundColor="#80000000" Grid.Row="0" Grid.Column="0" IsVisible="{Binding IsLoading}" VerticalOptions="Center" HorizontalOptions="Center">
                 <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
             </Frame>
+            <!-- Controles do carrossel -->
             <!-- Carrossel -->
-            <CarouselView ItemsSource="{Binding Items}">
+            <CarouselView ItemsSource="{Binding Items}" PeekAreaInsets="70" IsSwipeEnabled="False">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>
@@ -25,18 +26,17 @@
                                    FontSize="Large"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center" />
-                                    <!--
+                                    <!-- Xamarin não carrega imagens de endereços externos
                                     <Image Source="{Binding Thumbnail}"
                                    Aspect="AspectFill"
                                    HeightRequest="150"
                                    WidthRequest="150"
-                                   HorizontalOptions="Center" />
-                                    -->
-                                    <Image Source="https://via.placeholder.com/150/8e973b"
-                                   Aspect="AspectFill"
-                                   HeightRequest="150"
-                                   WidthRequest="150"
-                                   HorizontalOptions="Center" />
+                                   HorizontalOptions="Center" /> -->
+                                    <WebView Source="{Binding Thumbnail}" 
+                                        HeightRequest="150"
+                                        WidthRequest="150"
+                                        HorizontalOptions="Center" 
+                                        VerticalOptions="Center"></WebView>
                                 </StackLayout>
                             </Frame>
                         </StackLayout>
