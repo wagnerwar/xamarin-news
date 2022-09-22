@@ -8,8 +8,22 @@
                 <ActivityIndicator Color="White" VerticalOptions="Center" HorizontalOptions="Center" x:Name="actInd" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
             </Frame>
             <!-- Controles do carrossel -->
+            <StackLayout HorizontalOptions="CenterAndExpand" Margin="10" Orientation="Horizontal">
+                <ImageButton Source="icone_voltar"
+                                   Aspect="AspectFill"
+                                   HeightRequest="50"
+                                   WidthRequest="50"
+                                   HorizontalOptions="Start"
+                                   Command="{Binding AnteriorCommand}"/>
+                <ImageButton Source="icone_detalhe"
+                                   Aspect="AspectFill"
+                                   HeightRequest="50"
+                                   WidthRequest="50"
+                                   HorizontalOptions="End"
+                             Command="{Binding ProximaCommand}"/>
+            </StackLayout>
             <!-- Carrossel -->
-            <CarouselView ItemsSource="{Binding Items}" PeekAreaInsets="70" IsSwipeEnabled="False">
+            <CarouselView ItemsSource="{Binding Items}" PeekAreaInsets="10" IsSwipeEnabled="False" Position="{Binding Posicao}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout>

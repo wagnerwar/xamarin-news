@@ -22,8 +22,21 @@ namespace StoreMakeUpApp.ViewModel
             set
             {
                 items = value;
+                OnPropertyChanged();
             }
         }
+        private int posicao;
+        public int Posicao
+        {
+            get { return posicao; }
+            set
+            {
+                posicao = value;
+                OnPropertyChanged();
+            }
+        }
+        public ICommand ProximaCommand { get; set; }
+        public ICommand AnteriorCommand { get; set; }
         private async Task CarregarFotos(AlbumUsuario album)
         {
             try
@@ -32,7 +45,8 @@ namespace StoreMakeUpApp.ViewModel
                 foreach(var i in lista)
                 {
                     Items.Add(i);
-                }
+                }                
+                Posicao = 0;                
                 IsLoading = false;
             }
             catch (Exception ex)
@@ -46,8 +60,40 @@ namespace StoreMakeUpApp.ViewModel
             _service = new UsuarioService();
             IsLoading = true;
             Items = new ObservableCollection<FotoAlbum>();
+            AnteriorCommand = new Command(async () => await CarregarAnterior());
+            ProximaCommand = new Command(async () => await CarregarProxima());
             var t = Task.Run(() => this.CarregarFotos(album));
             t.Wait();
+        }
+        private async Task CarregarProxima()
+        {
+            try
+            {
+                int total = Items.Count;
+                //int total = 50;
+                if(Posicao < total)
+                {
+                    Posicao++;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
+            }
+        }
+        private async Task CarregarAnterior()
+        {
+            try
+            {
+                if(Posicao > 0)
+                {
+                    Posicao--;
+                }
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
+            }
         }
     }
 }
