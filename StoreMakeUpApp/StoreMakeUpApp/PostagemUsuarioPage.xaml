@@ -25,7 +25,13 @@
                 <ImageButton                                 
                     Source="icone_comentario.png"                   
                     Command="{Binding ExibirComentariosCommand}"                                                                
-                    ></ImageButton>
+                    >
+                </ImageButton>
+                <ImageButton                                 
+                    Source="icone_add_comentario.png"                   
+                    Command="{Binding IncluirComentariosCommand}"                                                                
+                    >
+                </ImageButton>
             </StackLayout>
             <StackLayout IsVisible="{Binding IsExibirComentarios}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
                 <Label Text="Comentários" FontSize="Large" HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
@@ -37,6 +43,9 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsIncluirComentarios}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
+                <Label Text="Inserir Comentário" FontSize="Large" HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

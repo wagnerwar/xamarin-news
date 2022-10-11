@@ -8,6 +8,8 @@ namespace StoreMakeUpApp.Model
 {
     public class ComentarioPostagem
     {
+        [JsonProperty(PropertyName = "postId")]
+        public int PostId { get; set; }
         [JsonProperty(PropertyName = "id")]
         public int Id { get; set; }
         [JsonProperty(PropertyName = "name")]

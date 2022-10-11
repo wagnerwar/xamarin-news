@@ -15,6 +15,7 @@ namespace StoreMakeUpApp.ViewModel
     {
         private INavigation _navigation { get; set; }
         private UsuarioService _service { get; set; }
+        public ICommand IncluirComentariosCommand { get; set; }
         public ICommand ExibirComentariosCommand { get; set; }
         public ICommand FecharPostagemCommand { get; set; }
         private PostagemUsuario postagem;
@@ -24,6 +25,7 @@ namespace StoreMakeUpApp.ViewModel
             set
             {
                 postagem = value;
+                OnPropertyChanged();
             }
         }
         private ObservableCollection<ComentarioPostagem> comentarios;
@@ -33,6 +35,7 @@ namespace StoreMakeUpApp.ViewModel
             set
             {
                 comentarios = value;
+                OnPropertyChanged();
             }
         }
         private bool exibirComentarios;
@@ -45,6 +48,16 @@ namespace StoreMakeUpApp.ViewModel
                 OnPropertyChanged();
             }
         }
+        private bool incluirComentarios;
+        public bool IsIncluirComentarios
+        {
+            get { return incluirComentarios; }
+            set
+            {
+                incluirComentarios = value;
+                OnPropertyChanged();
+            }
+        }
         public PostagemViewModel(PostagemUsuario postagem, INavigation navigation)
         {
             _navigation = navigation;
@@ -52,14 +65,29 @@ namespace StoreMakeUpApp.ViewModel
             this.Comentarios = new ObservableCollection<ComentarioPostagem>();
             this.Postagem = postagem;
             IsExibirComentarios = false;
+            IsIncluirComentarios = false;
             ExibirComentariosCommand = new Command(async () => await EventoExibirComentarios());
             FecharPostagemCommand = new Command(async () => await FecharPostagem());
+            IncluirComentariosCommand = new Command(async () => await EventoIncluirComentarios());
+        }
+        private async Task EventoIncluirComentarios()
+        {
+            try
+            {
+                IsIncluirComentarios = true;
+                IsExibirComentarios = false;
+            }
+            catch (Exception ex)
+            {
+                ExibirMensagemErro();
+            }
         }
         private async Task EventoExibirComentarios()
         {
             try
             {
-                IsLoading = true;                
+                IsLoading = true;
+                IsExibirComentarios = false;
                 var lista = await _service.BuscarComentariosPostagemAsync(postagem.Id);
                 Comentarios.Clear();
                 foreach(var item in lista)
@@ -68,6 +96,7 @@ namespace StoreMakeUpApp.ViewModel
                 }
                 IsLoading = false;
                 IsExibirComentarios = true;
+                IsIncluirComentarios = false;
             }
             catch (Exception ex)
             {
