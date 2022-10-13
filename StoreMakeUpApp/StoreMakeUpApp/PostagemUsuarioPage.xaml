@@ -44,8 +44,20 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <StackLayout IsVisible="{Binding IsIncluirComentarios}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand">
-                <Label Text="Inserir Comentário" FontSize="Large" HorizontalOptions="CenterAndExpand" TextColor="Black"></Label>
+            <StackLayout IsVisible="{Binding IsIncluirComentarios}" VerticalOptions="StartAndExpand" HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+                <TableView Intent="Form">
+                    <TableRoot>
+                        <TableSection Title="Inserir Comentário">
+                            <EntryCell  Placeholder="Digite aqui teu comentário" Text="{Binding Comentario}" HorizontalTextAlignment="Start" ></EntryCell>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                    <ImageButton HorizontalOptions="Start" Source="icone_send.png" Command="{Binding EnviarComentarioCommand}"></ImageButton>
+                                    <ImageButton HorizontalOptions="Start" Source="icone_limpar.png" Command="{Binding LimparComentarioCommand}"></ImageButton>
+                                </StackLayout>
+                            </ViewCell>
+                        </TableSection>
+                    </TableRoot>
+                </TableView>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

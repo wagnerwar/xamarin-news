@@ -16,6 +16,11 @@ namespace StoreMakeUpApp
         {
             InitializeComponent();
             this.BindingContext = new PostagemViewModel(postagem, Navigation);
+            
+            MessagingCenter.Subscribe<PostagemUsuarioPage>(this, "MensagemSucessoEnvioComentario", (sender) =>
+            {
+                DisplayAlert("Sucesso!", "Comentário enviado com sucesso.", "OK");
+            });
         }
     }
 }
